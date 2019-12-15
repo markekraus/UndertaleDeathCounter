@@ -1,8 +1,9 @@
 # Measure Undertale Deaths
 
 This script will create a file that can be used in OBS to display the current total death count.
+The count will be automatically updated each time you get a Game Over screen in Undertale.
 
-# Usage
+## Usage
 
 In a PowerShell console, run the following from the folder where you have stored the script.
 

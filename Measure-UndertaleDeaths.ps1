@@ -14,6 +14,10 @@
     .PARAMETER Message
         The message that will be set in the OutFile. Use '{0}' to represent the death count.
         Defaults to 'Undertale Deaths: {0}'.
+    .PARAMETER Offset
+        Number of deaths to offset the count by. This will be added to the death count. Use a negative number
+        to decrease the death count. For example, if you are starting a new Undertale run and currently 
+        have 167 total deaths, you can use an offset of -167 to track just the number of deaths in the current run.
     .EXAMPLE
         & ./Measure-UndertaleDeaths.ps1
     .EXAMPLE
@@ -37,14 +41,18 @@ param(
 
     [Parameter()]
     [String]
-    $Message = 'Undertale Deaths: {0}'
+    $Message = 'Undertale Deaths: {0}',
+
+    [Parameter()]
+    [Int]
+    $Offset = 0
 )
 
 while ($true) {
     try {
         $Result = Get-Content $IniFile -ErrorAction Stop | Select-String "gameover"
         [int]$Count = ($Result.Line -split '=')[1] -replace '"'
-        $Content = $Message -f $Count
+        $Content = $Message -f ($Count + $Offset)
         Clear-Host
         Write-Host $Content
         $Content | Set-Content $OutFile -ErrorAction Stop
