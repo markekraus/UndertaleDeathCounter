@@ -12,7 +12,7 @@ In a PowerShell console, run the following from the folder where you have stored
 ```
 
 In OBS add a Text source for the file `%LOCALAPPDATA%\UndertaleDeathCount.txt`.
-The file path can be changed by specifying `OutFile`.
+The file path can be changed by specifying `-OutFile`.
 
 ```powershell
 & ./Measure-UndertaleDeathes.ps1 -OutFile 'c:\DeathCount.txt'
@@ -22,4 +22,11 @@ You can also customize the text using the `-Message` Parameter.
 
 ```powershell
 & ./Measure-UndertaleDeathes.ps1 -OutFile 'c:\DeathCount.txt' -Message '{0} Deaths'
+```
+
+If you want to add or subtract to the death count, you can use the `-Offset` parameter.
+For example, if you have 167 total deaths, are starting a new run, and want to only display the deaths for the current run, you could use the following:
+
+```powershell
+& ./Measure-UndertaleDeathes.ps1 -Offset -167
 ```
